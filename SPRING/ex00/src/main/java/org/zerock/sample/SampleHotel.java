@@ -1,0 +1,16 @@
+package org.zerock.sample;
+
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+//필드 주입, 세터 주입, 생성자 주입
+@Component
+@ToString
+@RequiredArgsConstructor
+public class SampleHotel {
+
+    private final Chef chef;
+
+}
