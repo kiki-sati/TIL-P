@@ -2,20 +2,28 @@ package org.zerock.controller;
 
 import com.oracle.tools.packager.Log;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
+import org.zerock.domain.TodoDTO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/sample/*") //현재 클래스의 모든 메서드들의 기본적인 url 경로
 @Log4j
 public class SampleController {
+
+    @InitBinder
+    public  void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        binder.registerCustomEditor(java.util.Date.class,
+                new CustomDateEditor(dateFormat, false));
+    }
 
     @RequestMapping("")
     public void basic(){
@@ -71,6 +79,26 @@ public class SampleController {
 
         return "ex02Bean";
     }
+
+    @GetMapping("/ex03")
+    public String ex03(TodoDTO todo) {
+        log.info("todo: " + todo);
+        return "ex03";
+    }
+
+    @GetMapping("/ex04")
+    public String ex04(SampleDTO dto, @ModelAttribute("page") int page) {
+
+        log.info("dto: " + dto);
+        log.info("page: " + page);
+
+        return "/sample/ex04";
+
+    }
+
+    public void ex05
+
+
 
 
 }
