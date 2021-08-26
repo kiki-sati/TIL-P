@@ -73,30 +73,29 @@ public class SampleController {
     }
 
     @GetMapping("/ex02Bean")
-    public String ex02Bean(SampleDTOList list){
+    public String ex02Bean(@ModelAttribute("slist") SampleDTOList list){
 
         log.info("list dtos : " + list);
 
-        return "ex02Bean";
+        return "sample/ex02Bean";
     }
 
-    @GetMapping("/ex03")
-    public String ex03(TodoDTO todo) {
-        log.info("todo: " + todo);
-        return "ex03";
-    }
+//    @GetMapping("/ex03")
+//    public String ex03(TodoDTO todo) {
+//        log.info("todo: " + todo);
+//        return "ex03";
+//    }
+//
+//    @GetMapping("/ex04")
+//    public String ex04(SampleDTO dto, @ModelAttribute("page") int page) {
+//
+//        log.info("dto: " + dto);
+//        log.info("page: " + page);
+//
+//        return "ex02Bean";
+//
+//    }
 
-    @GetMapping("/ex04")
-    public String ex04(SampleDTO dto, @ModelAttribute("page") int page) {
-
-        log.info("dto: " + dto);
-        log.info("page: " + page);
-
-        return "/sample/ex04";
-
-    }
-
-    public void ex05
 
 
 
