@@ -6,25 +6,24 @@ URL = f"https://www.indeed.com/jobs?q=python&limit={LIMIT}"
 
 
 def get_last_page():
-    #가져올 페이지 입력
+    # 가져올 페이지 입력
     result = requests.get(URL)
 
-    #페이지에 쓸 soup 생성
+    # 페이지에 쓸 soup 생성
     soup = BeautifulSoup(result.text, "html.parser")
 
-    #soup 찾은걸 담는용도
+    # soup 찾은걸 담는용도
     pagination = soup.find("div", {"class": "pagination"})
 
-    #찾은거에서 모든 a(링크)를 찾는다.
-    #찾은 링크를 리스트로 만들어준다.
+    # 찾은거에서 모든 a(링크)를 찾는다.
+    # 찾은 링크를 리스트로 만들어준다.
     links = pagination.find_all('a')
-    pages = []  #빈 배열을 만들어주기
-    for link in links[:-1]:  #어디서부터 어디까지 가져올지 페이지 지정가능
-        pages.append(int(link.string))  #span을 찾은다음 그 안에 있는 string만 가져온다.
+    pages = []  # 빈 배열을 만들어주기
+    for link in links[:-1]:  # 어디서부터 어디까지 가져올지 페이지 지정가능
+        pages.append(int(link.string))  # span을 찾은다음 그 안에 있는 string만 가져온다.
 
-    #마지막 숫자만 가져오기
+    # 마지막 숫자만 가져오기
     max_page = pages[-1]
-    return max_page
 
 
 def extract_job(html):
@@ -55,23 +54,24 @@ def extract_job(html):
 
 
 def extract_jobs(last_page):
-  jobs = []
-  for page in range(last_page):
-    print(f"Scrapping page Indeed: page {page}")
-    result = requests.get(f"{URL}&start={page*LIMIT}")
-    soup = BeautifulSoup(result.text, 'html.parser')
+    jobs = []
+    for page in range(last_page):
+        print(f"Scrapping page Indeed: page {page}")
+        result = requests.get(f"{URL}&start={page*LIMIT}")
+        soup = BeautifulSoup(result.text, 'html.parser')
 
-    results = soup.find_all("a", {"class": "fs-unmask"})  #모든 일자리 찾기
+        results = soup.find_all("a", {"class": "fs-unmask"})  # 모든 일자리 찾기
 
-    for result in results:
-      job = extract_job(result)
-      jobs.append(job)
+        for result in results:
+            job = extract_job(result)
+            jobs.append(job)
 
 
 # print(company) #회사 목록 출력
-  return jobs
+    return jobs
+
 
 def get_jobs():
-  last_page = get_last_page()
-  jobs = extract_jobs(last_page)
-  return jobs
+    last_page = get_last_page()
+    jobs = extract_jobs(last_page)
+    return jobs

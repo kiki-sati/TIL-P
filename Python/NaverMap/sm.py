@@ -20,7 +20,7 @@ time.sleep(2)
 # 검색입력
 elem = driver.find_element_by_css_selector(
     ".panel_wrap .search_box .input_box .input_search")
-elem.send_keys("마포구 ")
+elem.send_keys("마포구 헬스장")
 elem.send_keys(Keys.RETURN)
 
 
