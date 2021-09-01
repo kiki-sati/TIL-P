@@ -36,26 +36,6 @@ soup = BeautifulSoup(html, "lxml")
 # 업체리스트 Iframe 진입
 browser.switch_to.frame("searchIframe")
 
-# # TEST -> ok
-
-# 페이지바 찾기
-page_bar = browser.find_elements_by_class_name("_2ky45")[0]
-pages = page_bar.find_elements_by_css_selector("a")
-
-page_now = page_bar.find_elements_by_class_name(
-    "_2tk2s _5vmWW")[0].text.replace("현재페이지", "").strip()
-
-# 페이지 바 리스트 출력
-for page in pages:
-    page_num = page.text.strip()
-    if page_num in ["이전페이지", "다음페이지"]:
-        pass
-    elif int(page_num) > int(page_now):
-        page.send_keys("\n")
-        browser.implicitly_wait(3)
-        time.sleep(1+random.uniform(0, 1))
-
-
 browser.find_element_by_class_name("_3Apve").click()
 print("타이틀 클릭 완료")
 
