@@ -51,15 +51,16 @@ html
 soup
 
 place_info_list = []
-for item in place_info :
+for item in place_info:
     temp = []
-    title = place_info.find_all("span", attrs= {"class": "_3XamX"}).get_text() #업체명
-    phone_num = place_info.find_all("span", {"class": "_3ZA0S"})#전화번호
-    address = place_info.find_all("span", {"class": "_2yqUQ"}) #주소
-    hours = place_info.find_all("div", {"class": "_2ZP3j "}) #영업시간
-    info = place_info.find_all("div", {"class":"_1h3B_"}) #시설정보
-    introduction = ("span" , {"class" : "WoYOw"})#업체소개
-    #place_photo = #업체사진
+    title = place_info.find_all(
+        "span", attrs={"class": "_3XamX"}).get_text()  # 업체명
+    phone_num = place_info.find_all("span", {"class": "_3ZA0S"})  # 전화번호
+    address = place_info.find_all("span", {"class": "_2yqUQ"})  # 주소
+    hours = place_info.find_all("div", {"class": "_2ZP3j "})  # 영업시간
+    info = place_info.find_all("div", {"class": "_1h3B_"})  # 시설정보
+    introduction = ("span", {"class": "WoYOw"})  # 업체소개
+    # place_photo = #업체사진
     print(title)
 
 # 더이상 누를게 없을때 브레이크
