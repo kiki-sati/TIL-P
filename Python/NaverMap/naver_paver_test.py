@@ -84,9 +84,9 @@ dic['영업시간'].append(data_list[data_list.index('영업시간')+1])
 # 시설정보
 dic['시설정보'].append(data_list[data_list.index('편의')+1])
 
-# 업체소개
+# 업체소개 (for 문으로 돌려서 어펜드로 넣기)
 dic['업체소개'].append(
-    data_list[data_list.index('설명')+1: data_list.index('접기')])(strip=True)
+    data_list[data_list.index('설명')+1: data_list.index('접기')])
 
 print(dic)
 

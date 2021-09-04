@@ -15,7 +15,8 @@ with open('healthtest.csv') as file:
             data_header = data.split(',')
         else:
             sample_list.append(data.split(','))
+            line_counter += 1
 
-        line_counter += 1
+        
 
 print('total-Count', line_counter)
