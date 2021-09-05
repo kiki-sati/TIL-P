@@ -119,9 +119,8 @@ for page in range(3, 4):
             dic['placeaddress'].append('')
 
         try:
-            # 업체소개
-            dic['openhour'].append(data_list[data_list.index(
-                'openhour')+1:data_list.index('가격 정보 수정 제안')])
+            # 영업시간
+            dic['openhour'].append(data_list[data_list.index('openhour')+1])
         except:
             dic['openhour'].append('')
 
