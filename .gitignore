@@ -535,3 +535,4 @@ modules.xml
 
 /server
 *.xml
+.DS_Store
