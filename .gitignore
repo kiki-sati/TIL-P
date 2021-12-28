@@ -241,7 +241,7 @@ $RECYCLE.BIN/
 *.lnk
 
 #server
-/server
-/Server
+/servers
+/Servers
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,intellij+all,windows,macos
