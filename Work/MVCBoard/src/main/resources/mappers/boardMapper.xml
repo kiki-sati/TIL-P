@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chang.web.board.boardMapper">
+
+	<!-- 게시물 전체 출력 -->
+	<select id="getBoardList"
+		resultType="BoardVO">
+		select
+			postIdx,postName, postWriter, postContent, postDate, editDate,postView,bdCategory
+		from t_board
+	</select>
+	
+	<!-- 게시물 등록 -->
+	<insert id="insertBoard"
+		parameterType="BoardVO" >
+		insert into t_board 
+			(postName,postWriter, postContent ,postDate,bdCategory)
+		values
+			(#{postName},#{postWriter}, #{postContent}, now(), #{bdCategory})
+	</insert>
+	
+	<!-- 게시물 수정 -->
+	<update id="updateBoard" parameterType="BoardVO">
+		update t_board set
+			bdCategory = #{bdCategory},
+			postName = #{postName},
+			postContent = #{postContent},
+			editdate = now()
+		where
+			postIdx = #{postIdx}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete from t_board
+		where postIdx = #{postIdx}
+	</delete>
+	
+	<!-- 조회수 -->
+	<update id="updateViewCnt" parameterType="BoardVO">
+		update t_table set
+			postView = postView + 1
+		where
+			postIdx = #{postIdx}
+	</update>
+	
+</mapper>
+
+
+
