@@ -16,7 +16,7 @@ public class BoardController {
     @GetMapping("/board")
     public String getBoardList(Model model) throws Exception {
         model.addAttribute("boardList", boardService.getBoardList());
-        return "board/index";
+        return "board/list";
     }
 
 }
