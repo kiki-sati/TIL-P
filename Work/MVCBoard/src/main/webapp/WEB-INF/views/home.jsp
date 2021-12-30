@@ -4,7 +4,7 @@
 <script src="/js/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	location.href = "/board";
+	location.href = "/board/list";
 })
 </script>
 <head>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chang.web.board.dao.BoardDAO">
+
+	<!-- 게시물 전체 출력 -->
+	<select id="getBoardList" resultType="BoardVO">
+		SELECT
+		POST_IDX postIdx
+		, POST_NAME postName
+		, POST_WRITER postWriter
+		, POST_CONTENT postContent
+		, DATE_FORMAT(POST_DATE, '%Y/%m/%d %H:%i') postDate
+		, POST_VIEW postView
+		FROM t_board
+		ORDER BY POST_DATE DESC
+	</select>
+
+	<!--게시물 내용 출력 -->
+	<select id="getBoardContent" parameterType="int" resultType="BoardVO">
+		SELECT
+		POST_IDX postIdx
+		, POST_NAME postName
+		, POST_WRITER postWriter
+		, POST_CONTENT postContent
+		, DATE_FORMAT(POST_DATE, '%Y/%m/%d %H:%i') postDate
+		, POST_VIEW postView
+		, DATE_FORMAT(EDIT_DATE, '%Y/%m/%d %H:%i') editDate
+		FROM t_board
+		WHERE POST_IDX = #{postIdx}
+	</select>
+
+	<!-- 게시물 등록 -->
+	<insert id="insertBoard" parameterType="BoardVO">
+		INSERT INTO t_board (
+		POST_NAME
+		, POST_WRITER
+		, POST_CONTENT
+		, POST_DATE
+		) VALUES (
+		#{postName}
+		, #{postWriter}
+		, #{postContent}
+		, NOW()
+		)
+	</insert>
+
+	<!-- 게시물 수정 -->
+	<update id="updateBoard" parameterType="BoardVO">
+		UPDATE t_board SET
+		POST_NAME = #{postName}
+		, POST_WRITER = #{postWriter}
+		, POST_CONTENT = #{postContent}
+		, EDIT_DATE = NOW()
+		WHERE
+		POST_IDX = #{postIdx}
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM t_board
+		WHERE POST_IDX = #{postIdx}
+	</delete>
+
+	<!-- 조회수 -->
+	<update id="updateViewCnt" parameterType="BoardVO">
+		UPDATE t_board SET
+		POST_VIEW = POST_VIEW + 1
+		WHERE
+		POST_IDX = #{postIdx}
+	</update>
+
+	<!-- 댓글출력 -->
+	<select id="getCommentList" parameterType="CommentVO" resultType="CommentVO">
+		/* BoardDAO.getCommentList */
+		<![CDATA[
+			SELECT 
+				  CM_IDX cmIdx
+				, CM_CONTENT cmContent
+				, DATE_FORMAT(CM_DATE, '%Y/%m/%d %H:%i') cmDate
+				, CM_WRITER cmWriter
+			FROM t_comments
+			WHERE POST_IDX = #{postIdx}
+			ORDER BY CM_DATE DESC
+		]]>
+	</select>
+
+	<!-- 댓글 입력 -->
+	<insert id="insertComment" parameterType="CommentVO">
+		/* BoardDAO.insertComment */
+	 <![CDATA[
+	 	INSERT INTO t_comments (
+		 	  CM_CONTENT
+			, CM_DATE
+			, CM_WRITER
+			, POST_IDX
+		) VALUES ( 
+			  #{cmContent}
+			, NOW()
+			, #{cmWriter}
+			, #{postIdx}
+		)
+	 ]]>
+	</insert>
+
+</mapper>
+
+
+

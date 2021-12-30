@@ -15,11 +15,11 @@
 <script>
 	$(document).on('click', '#btnWriteForm', function(e){
 		e.preventDefault();
-		location.href = "/board/boardForm";
+		location.href = "/board/write";
 	});
 	
 	function fn_contentView(idx) {
-		location.href = "/getBoardContent?postIdx=" + idx;
+		location.href = "/board/getBoardContent?postIdx=" + idx;
 	}
 	
 </script>
