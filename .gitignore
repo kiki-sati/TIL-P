@@ -248,4 +248,7 @@ $RECYCLE.BIN/
 */target/*
 .target
 .classpath
+.web-1.0.0-BUILD-SNAPSHOT
+/web-1.0.0-BUILD-SNAPSHOT
+/web-1.0.0-BUILD-SNAPSHOT/
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,intellij+all,windows,macos
