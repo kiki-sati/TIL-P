@@ -247,6 +247,7 @@ $RECYCLE.BIN/
 /target
 */target/*
 .target
+target/
 .classpath
 .web-1.0.0-BUILD-SNAPSHOT
 /web-1.0.0-BUILD-SNAPSHOT
