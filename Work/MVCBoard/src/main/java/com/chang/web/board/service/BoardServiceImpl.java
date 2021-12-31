@@ -40,7 +40,15 @@ public class BoardServiceImpl implements BoardService{
         dao.insertBoard(boardVO);
     }
 
-    // 게시글 수정
+	// 답글 작성
+	@Override
+	public void insertBoardReply(BoardVO boardVO) throws Exception {
+		dao = template.getMapper(BoardDAO.class);
+		dao.insertBoardReply(boardVO);
+
+	}
+
+	// 게시글 수정
     @Override
     public void updateBoard(BoardVO boardVO) throws Exception {
         dao = template.getMapper(BoardDAO.class);

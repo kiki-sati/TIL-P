@@ -15,6 +15,9 @@ public interface BoardDAO {
 	// 게시물 등록
 	public void insertBoard(BoardVO boardVO) throws Exception;
 
+	// 답글 등록
+	public void insertBoardReply(BoardVO boardVO) throws Exception;
+
 	// 게시물 수정
 	public int updateBoard(BoardVO boardVO) throws Exception;
 	
@@ -32,5 +35,6 @@ public interface BoardDAO {
 	
 	// 댓글 입력
 	Integer insertComment(CommentVO commentVO) throws Exception;
+
 	
 }

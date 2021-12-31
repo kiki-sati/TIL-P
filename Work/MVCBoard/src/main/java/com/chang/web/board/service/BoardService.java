@@ -17,6 +17,9 @@ public interface BoardService {
 	// 게시글 작성 (void 하면 리턴 안해도 된다.)
 	public void insertBoard(BoardVO boardVO) throws Exception;
 
+	// 답글 등록
+	public void insertBoardReply(BoardVO boardVO) throws Exception;
+
 	// 게시물 수정
 	public void updateBoard(BoardVO boardVO) throws Exception;
 
