@@ -8,6 +8,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/*
+* 단위테스트
+* 단위 테스트를 잘 만드는게 좋은 테스트다.
+* */
+
 class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();

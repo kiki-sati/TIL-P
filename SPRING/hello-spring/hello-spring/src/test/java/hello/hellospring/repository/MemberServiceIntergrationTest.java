@@ -11,11 +11,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/*
+통합 테스트
+*/
+
+
 @SpringBootTest
 @Transactional
+// 테스트 시작 전에 트랜잭션 시작, 완료 후 Rollback. -> DB에 데이터가 남지 않아서 다음 테스트에 영향 X
 class MemberServiceIntegrationTest {
     @Autowired
     MemberService memberService;
+
     @Autowired
     MemberRepository memberRepository;
 
@@ -23,7 +30,7 @@ class MemberServiceIntegrationTest {
     public void 회원가입() throws Exception {
         //Given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("spring2");
         //When
         Long saveId = memberService.join(member);
         //Then
