@@ -1,20 +1,15 @@
 package jpabook.jpashop.repository;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
-
 import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
 
 @Repository //스프링빈으로 등록해준다.
+@RequiredArgsConstructor
 public class MemberRepository {
-
-	@PersistenceContext	//jpa 엔티티 매니저를 자동 주입 해준다.
-	private EntityManager em;
+	private final EntityManager em; //jpa 엔티티 매니저를 자동 주입 해준다. springboot가 @Autowired도 인젝션 처리가 되게 해주기때문에 이렇게 구현이 가능함
 
 	public void save(Member member) {
 		em.persist(member);
