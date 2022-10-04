@@ -23,13 +23,15 @@ import javax.persistence.Table;
 
 import org.aspectj.weaver.ast.Or;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) 	//생성사 사용을 막기 위한 제약
 public class Order {
 
 	@Id
@@ -41,7 +43,7 @@ public class Order {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //order를 퍼시스트 하면 안에 OrderItem도 강제로 퍼시스트 한다.
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY)
