@@ -2,6 +2,8 @@ package jpabook.jpashop.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,15 +21,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.aspectj.weaver.ast.Or;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
-@Getter @Setter
+@Getter
+@Setter
 public class Order {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	@Column(name = "order_id")
 	private Long id;
 
@@ -52,13 +58,55 @@ public class Order {
 		this.member = member;
 		member.getOrders().add(this);
 	}
+
 	public void addOrderItem(OrderItem orderItem) {
 		orderItems.add(orderItem);
 		orderItem.setOrder(this);
 	}
+
 	public void setDelivery(Delivery delivery) {
 		this.delivery = delivery;
 		delivery.setOrder(this);
+	}
+
+	//==생성메서드//
+	public static Order creatOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+		Order order = new Order();
+		order.setMember(member);
+		order.setDelivery(delivery);
+		Arrays.stream(orderItems)
+			.forEach(order::addOrderItem);
+		order.setStatus(OrderStatus.ORDER);
+		order.setOrderDate(LocalDateTime.now());
+		return order;
+	}
+
+	//==비지니스 로직==//
+	/**
+	 * 주문취소
+	 */
+	public void cancel() {
+		if (delivery.getStatus() == DeliveryStatus.COMP) { //배송 완료일때
+			throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
+		}
+		this.setStatus(OrderStatus.CANCEL);
+		for (OrderItem orderItem : orderItems) {
+			orderItem.cancel();
+		}
+	}
+
+	//==조회 로직==//
+	/**
+	 * 전체 주문 가격 조회
+	 */
+	public int getTotalPrice() {
+/*		int totalPrice = 0;
+		for (OrderItem orderItem : orderItems) {
+			totalPrice = +orderItem.getTotalPrice();
+		}*/
+
+		//람다 활용하면 깔끔하게 가능
+		return orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
 	}
 
 }
