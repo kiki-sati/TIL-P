@@ -17,6 +17,7 @@ public class 폰켓몬나의풀이 {
         for (int num : nums) {
             set.add(num);
         }
+
         if (set.size() > pickPoncket) {
             return pickPoncket;
         } else {
